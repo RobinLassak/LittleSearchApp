@@ -59,7 +59,7 @@
           </div>
         </div>
         <div class="row d-flex justify-content-center align-items-center">
-          <div class="col-4">
+          <div class="col-lg-4 col-md-6 col-sm-8 col-12">
             <div class="row align-items-center">
               <div class="col-lg-4 col-md-12 col-sm-12 col-12">
                 <label for="keywords" class="col-form-label"
@@ -77,7 +77,25 @@
             </div>
           </div>
         </div>
-        <div class="row me-2 my-5">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-lg-4 col-md-6 col-sm-8 col-12">
+            <div class="row align-items-center mt-3">
+              <div class="col-lg-4 col-md-12 col-sm-12 col-12">
+                <label for="format" class="col-form-label"
+                  >Choose format:</label
+                >
+              </div>
+              <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+                <select name="format" id="format" class="form-select">
+                  <option value="csv">CSV</option>
+                  <option value="json">JSON</option>
+                  <option value="xml">XML</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row me-2 mt-3">
           <div class="col-12 d-flex justify-content-center align-items-center">
             <button class="btn btn-warning" onclick="saveKeyword()">
               Download
