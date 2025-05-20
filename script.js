@@ -9,14 +9,25 @@ function saveKeyword() {
     return;
   }
 
-  fetch(search.php, {
+  //Odeslani na backend
+  fetch("search.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ keyword, format }),
-  });
+  })
+    //Kontrola
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Odpověď z PHP:", data);
+    })
+    .catch((error) => {
+      console.error("Chyba:", error);
+    });
 }
+
+//Resetovani inputu
 function resetInput() {
   const keyword = document.getElementById("keywords");
   const format = document.getElementById("format");
@@ -24,6 +35,7 @@ function resetInput() {
   format.value = "";
 }
 
+//Zavolani funkci po stisknuti tlacitka
 function handleClick() {
   saveKeyword();
   resetInput();
