@@ -1,4 +1,4 @@
-function saveKeyword() {
+function actionDownload() {
   const keyword = document.getElementById("keywords").value;
   const format = document.getElementById("format").value;
   console.log("Zadane slovo: ", keyword);
@@ -26,6 +26,7 @@ function saveKeyword() {
         return;
       }
 
+      //Rozdeleni a prevedeni dat do daneho formatu
       switch (format) {
         case "json":
           content = JSON.stringify(data, null, 2);
@@ -90,6 +91,6 @@ function resetInput() {
 
 //Zavolani funkci po stisknuti tlacitka
 function handleClick() {
-  saveKeyword();
+  actionDownload();
   resetInput();
 }
