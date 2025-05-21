@@ -7,6 +7,7 @@ header("Content-Type: application/json");
 $rawData = file_get_contents("php://input");
 $data = json_decode($rawData, true);
 $keyword = $data['keyword'] ?? null;
+$format = $data['format'] ?? null;
 
 if (!$keyword) {
     echo json_encode(["error" => "Chybí keyword"]);
