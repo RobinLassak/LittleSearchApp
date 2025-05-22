@@ -1,3 +1,12 @@
+function escapeXml(unsafe) {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
 function actionDownload() {
   const keyword = document.getElementById("keywords").value;
   const format = document.getElementById("format").value;
@@ -15,7 +24,7 @@ function actionDownload() {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ keyword, format }),
+    body: JSON.stringify({ keyword }),
   })
     //Kontrola
     .then((response) => response.json())
@@ -25,7 +34,7 @@ function actionDownload() {
         alert(data.error);
         return;
       }
-
+      let content, mimeType, fileExtension;
       //Rozdeleni a prevedeni dat do daneho formatu
       switch (format) {
         case "json":
@@ -34,6 +43,7 @@ function actionDownload() {
           fileExtension = "json";
           break;
         case "csv":
+          const bom = "\uFEFF";
           const header = "Title,Link,Snippet\n";
           const rows = data.map(
             (item) =>
@@ -41,8 +51,8 @@ function actionDownload() {
                 item.link
               }","${item.snippet.replace(/"/g, '""')}"`
           );
-          content = header + rows.join("\n");
-          mimeType = "text/csv";
+          content = bom + header + rows.join("\n");
+          mimeType = "text/csv;charset=utf-8";
           fileExtension = "csv";
           break;
         case "xml":
