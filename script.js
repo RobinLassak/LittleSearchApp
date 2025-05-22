@@ -1,3 +1,4 @@
+//Nahrazeni specialnich znaku kvuli citelnosti XML vystupu
 function escapeXml(unsafe) {
   return unsafe
     .replace(/&/g, "&amp;")
@@ -34,7 +35,8 @@ function actionDownload() {
         alert(data.error);
         return;
       }
-      let content, mimeType, fileExtension;
+      let content, mimeType, fileExtension; //Textovy obsah | Typ souboru | Pripona souboru
+
       //Rozdeleni a prevedeni dat do daneho formatu
       switch (format) {
         case "json":
@@ -43,7 +45,7 @@ function actionDownload() {
           fileExtension = "json";
           break;
         case "csv":
-          const bom = "\uFEFF";
+          const bom = "\uFEFF"; //UTF-8
           const header = "Title,Link,Snippet\n";
           const rows = data.map(
             (item) =>
@@ -52,7 +54,7 @@ function actionDownload() {
               }","${item.snippet.replace(/"/g, '""')}"`
           );
           content = bom + header + rows.join("\n");
-          mimeType = "text/csv;charset=utf-8";
+          mimeType = "text/csv;charset=utf-8"; // Rozpoznani ceskych znaku
           fileExtension = "csv";
           break;
         case "xml":
